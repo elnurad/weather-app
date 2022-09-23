@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
   
   const [weather, setWeather] = useState({});
-  const [tempUnit, setTempUnit] = useState('F');
-  const [location, setLocation] = useState('')
+  const [location, setLocation] = useState('Berlin')
   const apiKey = '76213925c4e0771dbabb037e3a681e74'
-  useEffect(() => {
-    setLocation('Berlin');
-   
-    }, []);
+
 
   async function getWeather(e){
     
@@ -25,25 +21,44 @@ function App() {
         setLocation(geoData[0].name)
         console.log(geoData)
       });
-    }
     await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${geoData[0].lat}&lon=${geoData[0].lon}&units=imperial&appid=${apiKey}`,{mode: 'cors'})
         .then((response) => response.json()) 
         .then((data)=>{
           setWeather(data)})
-          console.log(weather)
+        }
   }
 
   return (
     <div className="App">
+      <div className="container">
+      {Object.keys(weather).length ? 
+      <div className="weatherIndicators"> 
+      <div className="mainIndicators">
       <input placeholder="enter location" onKeyPress={getWeather} />
       <h1>{location}</h1>
       <h1>{Object.keys(weather).length > 0 ? `${weather.main.temp} F°`  : ''}</h1>
-      <ul>
-        <li key={Math.random()}><p>Feels like: {weather.main.feels_like}</p></li>
-        <li key={Math.random()}><p>Humidity: {weather.main.humidity}</p></li>
-        <li key={Math.random}><p>Wind: {weather.wind.speed} mph</p></li>
-        <li key={Math.random}><p>Forecast: {weather.weather[0].description}</p></li>
-      </ul>
+      </div>
+      <div className="secondaryIndicators">
+        <p>Feels like: {weather.main.feels_like} F°</p>
+        <p>Humidity: {weather.main.humidity}</p>
+        <p>Wind: {weather.wind.speed} mph</p>
+        <p>Forecast: {weather.weather[0].description}</p>
+      </div></div> : 
+      <div className="weatherIndicators">
+         <div className="mainIndicators">
+       <input placeholder="enter location" onKeyPress={getWeather} />
+      <h1>Berlin</h1>
+      <h1>67F°</h1>
+      </div>
+      <div className="secondaryIndicators">
+        <p>Feels like: 68F°</p>
+        <p>Humidity: 45%</p>
+        <p>Wind: 2.3 mph</p>
+        <p>Forecast: Overcast</p>
+      </div>
+  
+        </div>}
+    </div>
     </div>
   );
 }

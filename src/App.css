@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Babylonica&family=Barlow+Condensed:wght@300;600&family=Chewy&family=Irish+Grover&family=La+Belle+Aurore&family=Lobster&family=PT+Sans+Narrow&family=Raleway&family=Roboto+Flex:opsz,wght@8..144,100&family=Secular+One&family=Skranji&family=UnifrakturMaguntia&family=Unna&display=swap');
 .App {
-  text-align: center;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -8,8 +8,35 @@
 
 body {
   text-align: center;
-  background: url('./assets/nature_four.jpeg');
-  background-size: cover;
+  font-family: 'Unna', serif;
+  /* background: url('./assets/nature_four.jpeg');
+  background-size: cover; */
+  background: rgb(48, 111, 248);
   height: 100vh;
   width: 100vw;
+  color: white;
+}
+
+.container {
+  margin: 4em auto;
+  margin-right: 20em;
+  margin-left: 20em;
+  padding: 2em;
+
+}
+.weatherIndicators{
+  display: flex;
+  gap: 3em;
+
+}
+.secondaryIndicators {
+  text-align: left;
+  
+}
+
+.mainIndicators {
+  text-align: left;
+}
+input {
+  width: 15em;
 }
